@@ -246,7 +246,6 @@ if (isEmail) {
 
 
 export const walletService = {
-  depositMoney,
   getMyWallet,
   withdrawMoney,
   sendMoney,

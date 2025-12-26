@@ -13,18 +13,18 @@ export const getMyWallet = catchAsync(async (req: Request, res: Response,next:Ne
     });
 })
 
-export const depositMoney = catchAsync(async (req: Request, res: Response,next:NextFunction) => {
-  const userId = req.params.id;
-  const { amount } = req.body;
-    const newBalance = await walletService.depositMoney(userId, amount);
-    sendResponse(res, {
-      success: true,
-      message: "Money deposited successfully",
-      statusCode: 200,
-      data: newBalance,
-    });
+// export const depositMoney = catchAsync(async (req: Request, res: Response,next:NextFunction) => {
+//   const userId = req.params.id;
+//   const { amount } = req.body;
+//     const newBalance = await walletService.depositMoney(userId, amount);
+//     sendResponse(res, {
+//       success: true,
+//       message: "Money deposited successfully",
+//       statusCode: 200,
+//       data: newBalance,
+//     });
   
-})
+// })
 
 export const withdrawMoney =catchAsync( async (req: Request, res: Response,next:NextFunction) => {
   const userId = req.user?.userId;
