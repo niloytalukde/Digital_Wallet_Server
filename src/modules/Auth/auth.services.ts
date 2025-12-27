@@ -89,11 +89,11 @@ export const loginUser = async (payload: LoginPayload) => {
 };
 
 const changePassword = async (
-  decodedToken: JwtPayload,
+ userId:string,
   oldPassword: string,
   newPassword: string
 ) => {
-  const user = await User.findById(decodedToken.userId);
+  const user = await User.findById(userId);
 
   const isOldPasswordMatch = await bcryptjs.compare(
     oldPassword,

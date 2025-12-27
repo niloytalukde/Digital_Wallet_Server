@@ -93,15 +93,39 @@ interface GetAllTransactionsParams {
 // };
 
 
-const getAllTransactions =async()=>{
+type PaginationParams = {
+  page?: number;
+  limit?: number;
+};
 
-const transactions = await Transaction.find()
-    .populate("from to")
-    .sort({ createdAt: -1 });
+export const getAllTransactions = async ({
+  page = 1,
+  limit = 10,
+}: PaginationParams) => {
+  const skip = (page - 1) * limit;
 
-return transactions
+  const [transactions, total] = await Promise.all([
+    Transaction.find()
+      .populate("from to")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit),
 
-}
+    Transaction.countDocuments(),
+  ]);
+
+  return {
+    data: transactions,
+    meta: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+};
+
+
 
 
 

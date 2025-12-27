@@ -12,13 +12,26 @@ export const getMyTransactions = async (req:Request, res:Response) => {
   }         
 };
 
-export const getAllTransactions = async (req:Request, res:Response) => {        
-    try {
-      const transactions = await TransactionService.getAllTransactions(req.query);
-        res.status(200).json({ success: true, data: transactions });
-    } catch (error : any) {
-        res.status(500).json({ success: false, message: error.message });
-    }       
+
+export const getAllTransactions = async (req: Request, res: Response) => {
+  try {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
+
+    const transactions = await TransactionService.getAllTransactions({
+      page,
+      limit,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: transactions.data,
+      meta: transactions.meta,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
-
-

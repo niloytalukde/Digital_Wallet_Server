@@ -30,9 +30,9 @@ export const login = async (req: Request, res: Response) => {
 
 export const changePassword = async (req: Request, res: Response) => {
   const { oldPassword, newPassword } = req.body;
-const decodedToken=req.user
+const userId=req.user.userId
 
-   await authServices.changePassword(decodedToken,oldPassword,newPassword);
+   await authServices.changePassword(userId,oldPassword,newPassword);
 
   sendResponse(res, {
     success: true,
