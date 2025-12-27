@@ -22,10 +22,15 @@ const getAllAgents=async()=>{
     return users;
 }  
 
+
 const blockUser=async(userId:string,status:string)=>{
     const user=await User.findByIdAndUpdate(userId,{status:status},{new:true});
     return user;
 }   
+
+
+
+
 const approveAgent=async(userId:string,agentStatus:string)=>{
     const user=await User.findByIdAndUpdate(userId,{isApproved:agentStatus},{new:true});
     return user;

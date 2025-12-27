@@ -29,69 +29,79 @@ interface GetAllTransactionsParams {
   sortOrder?: "asc" | "desc";
 }
 
-export const getAllTransactions = async (params: GetAllTransactionsParams) => {
-  const {
-    searchText,
-    type,
-    status,
-    minAmount,
-    maxAmount,
-    page = 1,
-    limit = 10,
-    sortBy = "createdAt",
-    sortOrder = "desc",
-  } = params;
+// export const getAllTransactions = async (params: GetAllTransactionsParams) => {
+//   const {
+//     searchText,
+//     type,
+//     status,
+//     minAmount,
+//     maxAmount,
+//     page = 1,
+//     limit = 10,
+//     sortBy = "createdAt",
+//     sortOrder = "desc",
+//   } = params;
 
-  const filter: any = {};
+//   const filter: any = {};
 
-  if (type) {
-    filter.type = type;
-  }
-
-
-  if (status) {
-    filter.status = status;
-  }
+//   if (type) {
+//     filter.type = type;
+//   }
 
 
-  if (minAmount !== undefined || maxAmount !== undefined) {
-    filter.amount = {};
-    if (minAmount !== undefined) filter.amount.$gte = minAmount;
-    if (maxAmount !== undefined) filter.amount.$lte = maxAmount;
-  }
+//   if (status) {
+//     filter.status = status;
+//   }
+
+
+//   if (minAmount !== undefined || maxAmount !== undefined) {
+//     filter.amount = {};
+//     if (minAmount !== undefined) filter.amount.$gte = minAmount;
+//     if (maxAmount !== undefined) filter.amount.$lte = maxAmount;
+//   }
 
   
-  if (searchText) {
-    filter.$or = [
-      { "userEmail": { $regex: searchText, $options: "i" } },
-      { "userPhone": { $regex: searchText } },
-      { "wallet": searchText }, // wallet id exact match
-    ];
-  }
+//   if (searchText) {
+//     filter.$or = [
+//       { "userEmail": { $regex: searchText, $options: "i" } },
+//       { "userPhone": { $regex: searchText } },
+//       { "wallet": searchText }, // wallet id exact match
+//     ];
+//   }
 
-  // Pagination and Sorting
-  const skip = (page - 1) * limit;
-  const sortOption: any = { [sortBy]: sortOrder === "asc" ? 1 : -1 };
+//   // Pagination and Sorting
+//   const skip = (page - 1) * limit;
+//   const sortOption: any = { [sortBy]: sortOrder === "asc" ? 1 : -1 };
 
-  const [transactions, total] = await Promise.all([
-    Transaction.find(filter)
-      .sort(sortOption)
-      .skip(skip)
-      .limit(limit)
-      .populate("user", "name email phone") 
-      .populate("wallet"),                  
-    Transaction.countDocuments(filter),
-  ]);
+//   const [transactions, total] = await Promise.all([
+//     Transaction.find(filter)
+//       .sort(sortOption)
+//       .skip(skip)
+//       .limit(limit)
+//       .populate("user", "name email phone") 
+//       .populate("wallet"),                  
+//     Transaction.countDocuments(filter),
+//   ]);
 
-  return {
-    data: transactions,
-    total,
-    page,
-    limit,
-    totalPages: Math.ceil(total / limit),
-  };
-};
+//   return {
+//     data: transactions,
+//     total,
+//     page,
+//     limit,
+//     totalPages: Math.ceil(total / limit),
+//   };
+// };
 
+
+const getAllTransactions =async()=>{
+
+const transactions = await Transaction.find()
+    .populate("from to")
+    .sort({ createdAt: -1 });
+
+return transactions
+
+}
 
 
 

@@ -5,7 +5,6 @@ import { setAuthCookie } from "../../utils/setAuthcooike";
 export const registerUser = async (req: Request, res: Response) => {
   const user = authServices.createUser(req.body);
   
-  console.log(req.body,"From auth controller ");
   return sendResponse(res, {
     success: true,
     message: "User created successfully",
