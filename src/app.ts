@@ -7,7 +7,7 @@ const app = express()
 
 app.use(
   cors({
-    origin: "http://localhost:5173", 
+    origin: ["http://localhost:5173", "https://digital-wallet-client-amber.vercel.app"],
     credentials: true,
   })
 );
