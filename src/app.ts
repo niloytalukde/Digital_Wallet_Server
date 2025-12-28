@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response } from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 import { indexRouter } from "./routes";
@@ -14,6 +14,10 @@ app.use(
 app.use(cookieParser()); 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req:Request, res:Response) => {
+  res.send("Server is running");
+});
 
 app.use("/api/v1", indexRouter);
 app.use(globalErrorHandler)
