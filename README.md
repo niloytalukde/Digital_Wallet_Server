@@ -170,32 +170,6 @@ Error handling with proper status codes:
 
 403 Forbidden → Role not permitted
 
-404 Not Found → Resource missing
-
-🎥 Demo Video (5–10 mins)
-Intro (30s) – Project title & purpose
-
-Folder Structure (1 min) – Walkthrough of src/
-
-Auth Flow (1 min) – Register, login, JWT roles
-
-User Features (1 min) – Deposit, withdraw, send money
-
-Agent Features (1 min) – Cash-in/out, commissions
-
-Admin Features (1 min) – Manage users, wallets, agents
-
-Postman Testing (3–4 mins) – Demonstrate endpoints
-
-Ending (30s) – Mention README, testing coverage, thanks
-
-✅ Future Enhancements
-Transaction fees & agent commissions
-
-Daily/monthly transaction limits
-
-Notification system (console/webhook)
-
 Advanced reporting dashboards
 
 🙌 Acknowledgements
