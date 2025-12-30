@@ -126,7 +126,7 @@ Postman (for testing)
 Steps
 bash
 # Clone repository
-git clone https://github.com/yourusername/digital-wallet-api.git
+git clone https://github.com/niloytalukde/Digital_Wallet_Server
 
 # Navigate to project
 cd digital-wallet-api
